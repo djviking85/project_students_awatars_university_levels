@@ -11,10 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.FacultyService;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -33,10 +30,12 @@ class FacultyServiceTest {
     }
     @Test
     void testAdd() {
-        Long id = 0L;
+
+        long id = 0L;
         String name = "hell";
         String color = "red";
         Faculty expectedFaculty = new Faculty(id, name, color);
+
         Faculty actualFaculty = facultyService.add("hell", "red");
         assertEquals(expectedFaculty, actualFaculty);
 //        assertEquals(expectedFaculty, this.facultyService.createFaculty(faculty));
@@ -57,28 +56,6 @@ class FacultyServiceTest {
 
         assertEquals(expectedFaculty, actualFaculty);
 
-
-
-//        Map<Long, Faculty> facultyCollection = facultyService.getAll();
-//        Faculty actualFaculty = facultyService.add("swat", "green");
-//        assertEquals(facultyCollection, actualFaculty);
-//        when(facultyService.save.save(faculty)).thenReturn(faculty);
-//        when(facultyRepository.findAll()).thenReturn(List.of(faculty));
-
-
-//        void testAdd() {
-//            String question = "question";
-//            String answer = "answer";
-//            Question expectedQuestion = new Question(question, answer);
-//            Question actualQuestion = javaQuestionService.add("question", "answer");
-//            assertEquals(expectedQuestion, actualQuestion);
-
-//        Collection<Faculty> facultyCollection = facultyService.getAll();
-//
-//        assertEquals(faculty, facultyService.createFaculty(faculty));
-//        assertEquals(1, facultyCollection.size());
-//        assertTrue(facultyCollection.contains(faculty));
-//        Mockito.verify(facultyRepository).save(Mockito.any());
     }
     @Test
     void createFaculty_CorrectParams_ReturnsCorrectFacultyAndActuallyAdds() {
