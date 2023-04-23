@@ -1,13 +1,7 @@
 package ru.hogwarts.school.model;
 
 public class FacultyUpdateRequest {
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
     private long id;
     private String name;
@@ -27,5 +21,12 @@ public class FacultyUpdateRequest {
 
     public void setColor(String color) {
         this.color = color;
+    }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
