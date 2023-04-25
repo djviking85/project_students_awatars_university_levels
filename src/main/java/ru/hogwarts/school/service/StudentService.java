@@ -1,49 +1,59 @@
 package ru.hogwarts.school.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 @Service
 
-public class StudentService {
-    private long countId = 0;
-    private Map<Long, Student> studients = new HashMap<>();
+public class StudentService  {
+//    private long countId = 0;
+//    private Map<Long, Student> studients = new HashMap<>();
 
     // создаем круд для сервиса
     // 1) креейт
-    public Student add(String name, int age) {
-        long id = countId;
-        countId++;
-        Student newStudient = new Student(id, name, age);
-        studients.put(id, newStudient);
-        return newStudient;
+    @Autowired
+    private final StudentRepository studentRepository;
+
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
+
+    public Student add(Student student) {
+//        long id = countId;
+//        countId++;
+//        Student newStudient = new Student(id, name, age);
+//        studients.put(id, newStudient);
+//        return newStudient;
+        return studentRepository.save(student);
     }
     //    crud read
-    public Map<Long, Student> getAll() {
-        return studients;
+    public Collection<Student> getAll() {
+        return studentRepository.findAll();
     }
     //crud update
-    public Student update(long id, String name, int age) {
-        Student studentUpdate = studients.get(id);
-        studentUpdate.setName(name);
-        studentUpdate.setAge(age);
-        return studentUpdate;
+    public Student update(Student student) {
+        return studentRepository.save(student);
+//        Student studentUpdate = studients.get(id);
+//        studentUpdate.setName(name);
+//        studentUpdate.setAge(age);
+//        return studentUpdate;
     }
     //crud delete
-    public Student delete(long id) {
-        return studients.remove(id);
+    public void deleteStudent(long id) {
+         studentRepository.deleteById(id);
     }
-    public Collection<Student> getFilteredByAge(int age) {
-        return studients.values().stream()
-                .filter(s -> s.getAge() == age).collect(Collectors.toList());
-    }
+//    public Collection<Student> getFilteredByAge(int age) {
+//        return studentRepository.values().stream()
+//                .filter(s -> s.getAge() == age).collect(Collectors.toList());
+//    }
 
 }
 
