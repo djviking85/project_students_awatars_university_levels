@@ -7,7 +7,7 @@ import ru.hogwarts.school.model.*;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
-import java.util.Map;
+
 
 @RestController
 @RequestMapping("/student")
@@ -37,10 +37,7 @@ public class StudentController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         return ResponseEntity.ok(foundStudent);
-//        return studientService.update(
-//                studientUpdRequest.getId(),
-//                studientUpdRequest.getName(),
-//                studientUpdRequest.getAge());
+
     }
 
     @DeleteMapping("{id}")
@@ -48,9 +45,4 @@ public class StudentController {
         studientService.deleteStudent(id);
         return ResponseEntity.ok().build();
     }
-//    @GetMapping("filter/{age}")
-//    public ResponseEntity<Collection<Student>> getAllFilteredByAge(@PathVariable int age){
-//        return ResponseEntity.ok(studientService.getFilteredByAge(age));
-//    }
-
 }
