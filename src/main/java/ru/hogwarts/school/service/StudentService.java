@@ -26,7 +26,7 @@ public class StudentService  {
         this.studentRepository = studentRepository;
     }
 
-    public Student add(Student student) {
+    public Student addStudent(Student student) {
 //        long id = countId;
 //        countId++;
 //        Student newStudient = new Student(id, name, age);
@@ -35,11 +35,11 @@ public class StudentService  {
         return studentRepository.save(student);
     }
     //    crud read
-    public Collection<Student> getAll() {
+    public Collection<Student> getAllStudent() {
         return studentRepository.findAll();
     }
     //crud update
-    public Student update(Student student) {
+    public Student updateStudent(Student student) {
         return studentRepository.save(student);
 //        Student studentUpdate = studients.get(id);
 //        studentUpdate.setName(name);

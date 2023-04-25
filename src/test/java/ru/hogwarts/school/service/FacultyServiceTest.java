@@ -36,11 +36,11 @@ class FacultyServiceTest {
         String color = "red";
         Faculty expectedFaculty = new Faculty(id, name, color);
 
-        Faculty actualFaculty = facultyService.add("hell", "red");
+        Faculty actualFaculty = facultyService.addFaculty("hell", "red");
         assertEquals(expectedFaculty, actualFaculty);
 //        assertEquals(expectedFaculty, this.facultyService.createFaculty(faculty));
 //        assertEquals(1, facultyCollection.size());
-        assertTrue(facultyService.getAll().containsValue("red"));
+        assertTrue(facultyService.getAllFaculty().contains("red"));
     }
 
     @Test

@@ -20,19 +20,19 @@ public class StudentController {
 
     @PostMapping
 
-    public Student add(Student student) {
-        return studientService.add(student);
+    public Student addStudent(@RequestBody Student student) {
+        return studientService.addStudent(student);
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<Collection<Student>> getAll() {
+    public ResponseEntity<Collection<Student>> getAllStudent() {
 
-        return ResponseEntity.ok(studientService.getAll());
+        return ResponseEntity.ok(studientService.getAllStudent());
     }
 
     @PutMapping
-    public ResponseEntity<Student> update(@RequestBody Student student) {
-        Student foundStudent = studientService.update(student);
+    public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
+        Student foundStudent = studientService.updateStudent(student);
         if (foundStudent == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
