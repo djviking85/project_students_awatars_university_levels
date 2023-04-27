@@ -24,11 +24,11 @@ public class StudentController {
         return studientService.addStudent(student);
     }
 
-    @GetMapping("/getAll")
-    public ResponseEntity<Collection<Student>> getAllStudent() {
-
-        return ResponseEntity.ok(studientService.getAllStudent());
-    }
+//    @GetMapping("/getAll")
+//    public ResponseEntity<Collection<Student>> getAllStudent() {
+//
+//        return ResponseEntity.ok(studientService.getAllStudent());
+//    }
 
     @PutMapping
     public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
@@ -45,4 +45,15 @@ public class StudentController {
         studientService.deleteStudent(id);
         return ResponseEntity.ok().build();
     }
+
+//    добавляем в 3.2 дз
+@GetMapping("/getAll")
+public ResponseEntity<Collection<Student>> getAllStudents(@RequestParam(required = false) String name,
+                                                          @RequestParam(required = false) Integer age) {
+    if (name != null && !name.isBlank())
+        return ResponseEntity.ok(studientService.getAllByName(name));
+    if (age != null)
+        return ResponseEntity.ok(studientService.getAllByAge(age));
+    return ResponseEntity.ok(studientService.getAllStudent());
+}
 }

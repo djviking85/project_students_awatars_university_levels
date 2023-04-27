@@ -35,5 +35,17 @@ public class StudentService  {
          studentRepository.deleteById(id);
     }
 
+//    добавляем
+    public Collection<Student> findByAgeBetween(int min, int max) {
+        return studentRepository.findAllByAgeBetween(min, max);
+    }
+    public Collection<Student> getAllByName(String name){
+        return studentRepository.findAllByNameContainsIgnoreCase(name);
+
+    }
+    public Collection<Student> getAllByAge(int age) {
+        return studentRepository.findAllByAge(age);
+    }
+
 }
 

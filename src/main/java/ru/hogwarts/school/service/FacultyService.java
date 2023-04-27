@@ -34,5 +34,12 @@ public class FacultyService {
     public void deleteFaculty(long id) {
 facultyRepository.deleteById(id);
     }
+    public Collection<Faculty> findAllByNameContainsIgnoreCase(String name) {
+        return facultyRepository.findAllByNameContainsIgnoreCase(name);
+    }
+    public Collection<Faculty> findAllByColorContainsIgnoreCase(String color) {
+        return facultyRepository.findAllByColorContainsIgnoreCase(color);
+    }
+
 
 }

@@ -29,6 +29,16 @@ public class FacultyController {
 
         return ResponseEntity.ok(facultyService.getAllFaculty());
     }
+//    новое из дз3.2
+    @GetMapping("filterBy")
+    public ResponseEntity<Collection<Faculty>> getAllFaculties(@RequestParam(required = false) String name,
+                                                               @RequestParam(required = false) String color){
+        if(name != null && !name.isBlank())
+            return ResponseEntity.ok(facultyService.findAllByNameContainsIgnoreCase(name));
+        if(color != null && !color.isBlank())
+            return ResponseEntity.ok(facultyService.findAllByColorContainsIgnoreCase(color));
+        return ResponseEntity.ok(facultyService.getAllFaculty());
+    }
 
     @PutMapping
     public ResponseEntity<Faculty> updateFaculty(@RequestBody Faculty faculty) {
