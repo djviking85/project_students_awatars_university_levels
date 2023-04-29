@@ -46,6 +46,10 @@ public class StudentService  {
     public Collection<Student> getAllByAge(int age) {
         return studentRepository.findAllByAge(age);
     }
+    public  Student findStudent(long id) {
+        return studentRepository.findById(id).get();
+    }
+
 
 }
 

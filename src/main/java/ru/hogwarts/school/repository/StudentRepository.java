@@ -8,4 +8,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Collection<Student> findAllByNameContainsIgnoreCase(String name);
     Collection<Student> findAllByAgeBetween(int min, int max);
     Collection<Student> findAllByAge(int age);
+
+    Collection<Student> findStudentById(long id);
 }
