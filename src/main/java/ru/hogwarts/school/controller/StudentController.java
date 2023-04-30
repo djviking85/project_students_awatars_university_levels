@@ -91,7 +91,7 @@ public ResponseEntity<Collection<Student>> getAllStudents(@RequestParam(required
     public ResponseEntity<byte[]> downloadAvatar(@PathVariable Long id) {
         Avatar avatar = avatarService.findAvatarCover(id);
 
-//        работа с загаловками
+//        работа с заголовками
         HttpHeaders headers = new HttpHeaders();
 //        заголовок что за тип данных возрвщается - медиатайп
         headers.setContentType(MediaType.parseMediaType(avatar.getMediaType()));
