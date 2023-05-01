@@ -22,6 +22,11 @@ public class FacultyService {
         return facultyRepository.save(faculty);
 
     }
+//    public Faculty add(String name, String color) {
+//        Faculty newFaculty = new Faculty();
+//        newFaculty = facultyRepository.save(newFaculty);
+//        return newFaculty;
+//    }
 //    crud read
     public Collection<Faculty> getAllFaculty() {
         return facultyRepository.findAll();
