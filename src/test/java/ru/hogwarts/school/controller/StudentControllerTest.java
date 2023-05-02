@@ -10,57 +10,58 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.FacultyCreationRequest;
-import ru.hogwarts.school.service.FacultyService;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-
+import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.model.StudientCreationReq;
+import ru.hogwarts.school.service.AvatarService;
+import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(FacultyController.class)
+@WebMvcTest(StudentController.class)
 
-class FacultyControllerTest {
+class StudentControllerTest {
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
-    private FacultyService facultyService;
-
+    private StudentService studentService;
+    @MockBean
+    private AvatarService avatarService;
     @Test
     void getAllTest() throws Exception {
 //        готовим данные
 
 //        подгтоовка результата
-        when(facultyService.getAllFaculty()).thenReturn(Collections.emptyList());
+        when(studentService.getAllStudent()).thenReturn(Collections.emptyList());
 //        начало теста
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/faculty/getAll")
-                .accept(MediaType.APPLICATION_JSON))
+                        .get("/student/getAll")
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
     }
     @Test
     void addTest() throws Exception {
         //        готовим данные
-        String name = "name";
-        String color = "color";
+        String name = "student";
+        int age = 22;
 
-        FacultyCreationRequest request = new FacultyCreationRequest();
+        StudientCreationReq request = new StudientCreationReq();
         request.setName(name);
-        request.setColor(color);
+        request.setAge(age);
         String jsonData = new ObjectMapper().writeValueAsString(request);
 
         //        подгтоовка результата
-        when(facultyService.addFaculty(new Faculty(1L,name,color))).thenReturn(new Faculty());
+        when(studentService.addStudent(new Student(1L,name,age))).thenReturn(new Student());
 
         //        начало теста
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/faculty")
+                        .post("/student")
                         .content(jsonData)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -69,40 +70,41 @@ class FacultyControllerTest {
     }
 
     @Test
-    void updateFacultyTestEdit() throws Exception {
-       final Long id = 1L;
-       final String name = "Hash";
-       final String color = "Black";
-        Faculty faculty = new Faculty();
-        faculty.setId(id);
-        faculty.setName(name);
-        faculty.setColor(color);
-        faculty = new Faculty(1L,name, color);
-        faculty.setId(id);
+    void updateStudentTestEdit() throws Exception {
+        final Long id = 1L;
+        final String name = "name";
+        final int age = 22;
+        Student student = new Student();
+        student.setId(id);
+        student.setName(name);
+        student.setAge(age);
+        student = new Student(1L,name, age);
+        student.setId(id);
 
-        when(facultyService.updateFaculty(any(Faculty.class))).thenReturn(faculty);
+        when(studentService.updateStudent(any(Student.class))).thenReturn(student);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .put("/faculty")
-                        .content(facultyService.toString())
+                        .content(studentService.toString())
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value(name))
-                .andExpect(jsonPath("$.color").value(color));
+                .andExpect(jsonPath("$.color").value(age));
     }
-
-
+//
+//
     @Test
-    void deleteFaculty_CorrectRequest_CorrectResponse() throws Exception {
+    void deleteStudent() throws Exception {
 
-        final Long facultyId = 1L;
+        final Long studentId = 1L;
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/faculty/" + facultyId)
+                        .delete("/student/" + studentId)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
 
 }
