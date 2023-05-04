@@ -37,17 +37,18 @@ public class AvatarServiceTest {
     private FacultyRepository facultyRepository;
 
     @Test
-    public void getAll_success() {
+     void getAll_success() {
         //Подготовка входных данных
-        int page = 0;
-        int size = 5;
+        int page = 1;
+        int size = 2;
         PageRequest pageRequest = PageRequest.of(page, size);
 
         Avatar firstAvatar = new Avatar();
-        firstAvatar.setId(1l);
+        firstAvatar.setId(1L);
+
 
         Avatar secondAvatar = new Avatar();
-        secondAvatar.setId(2l);
+        secondAvatar.setId(2L);
 
         List<Avatar> avatars = List.of(firstAvatar, secondAvatar);
 
@@ -64,7 +65,7 @@ public class AvatarServiceTest {
     }
 
     @Test
-    public void getAll_empty() {
+     void getAll_empty() {
         //Подготовка входных данных
         int page = 0;
         int size = 5;
