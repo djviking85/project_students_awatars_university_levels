@@ -15,12 +15,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 @RestController
 @RequestMapping("avatar")
 
 public class AvatarController {
     private final AvatarService avatarService;
+
     public AvatarController(AvatarService avatarService) {
         this.avatarService = avatarService;
 
@@ -55,7 +57,7 @@ public class AvatarController {
 
     @GetMapping(value = "{id}/cover")
 //    тперь 2ой метод
-    public void downloadAvatar (@PathVariable Long id, HttpServletResponse response) throws IOException {
+    public void downloadAvatar(@PathVariable Long id, HttpServletResponse response) throws IOException {
 //        получаем инфу об обложке
         Avatar avatar = avatarService.findAvatarCover(id);
 
@@ -64,10 +66,10 @@ public class AvatarController {
 
 //        так же обьявляем переменные на вход и выход
 //                берем класс файлс вызываем метод стрим и забираем по одному байту
-        try   (InputStream is = Files.newInputStream(path);
+        try (InputStream is = Files.newInputStream(path);
 //               берем обьект респонс и вызываем пакет оаут оф стрим
 
-               OutputStream os = response.getOutputStream();) {
+             OutputStream os = response.getOutputStream();) {
 
 //            покажет что все у нах хорошо
             response.setStatus(200);
@@ -79,5 +81,9 @@ public class AvatarController {
 //            вызываем метод трансферт ту на сверер - из жесткого диска и отправляем в браузер пользователя
             is.transferTo(os);
         }
-}
+    }
+    @GetMapping
+    public List<Avatar> getAll(@RequestParam int page, @RequestParam int size) {
+        return avatarService.getAll(page, size);
+    }
 }

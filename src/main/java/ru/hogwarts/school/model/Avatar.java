@@ -1,5 +1,7 @@
 package ru.hogwarts.school.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Objects;
@@ -66,7 +68,7 @@ public class Avatar {
     public void setMediaType(String mediaType) {
         this.mediaType = mediaType;
     }
-
+@JsonIgnore
     public byte[] getData() {
         return data;
     }
