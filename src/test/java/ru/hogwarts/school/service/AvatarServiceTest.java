@@ -47,6 +47,7 @@ public class AvatarServiceTest {
         firstAvatar.setId(1L);
 
 
+
         Avatar secondAvatar = new Avatar();
         secondAvatar.setId(2L);
 
