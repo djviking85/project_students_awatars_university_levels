@@ -26,10 +26,13 @@ class StudentServiceTest {
 
     @Test
     void getAverageAge_success() {
+
+
         //Подготовка входных данных
-        double avgAge = 45.5;
+        double avgAge = 30;
 
         //Подготовка ожидаемого результата
+
         when(studentRepository.getAverageAge()).thenReturn(avgAge);
 
         //Начало теста
@@ -42,15 +45,17 @@ class StudentServiceTest {
     @Test
     void getLastFiveStudent_success() {
         //Подготовка входных данных
-        Student firstStudent = new Student(1L,"Ivan", 35);
-        Student secondStudent = new Student(2L,"Petr", 29);
+        Student firstStudent = new Student(1L,"HArry", 22);
+        Student secondStudent = new Student(2L,"Kane", 229);
 
         List<Student> students = List.of(firstStudent, secondStudent);
 
         //Подготовка ожидаемого результата
+
         when(studentRepository.getLastFiveStudentsId()).thenReturn(students);
 
         //Начало теста
+
         List<Student> actualStudents = studentService.getLastFiveStudent();
         assertEquals(students, actualStudents);
         verify(studentRepository).getLastFiveStudentsId();
