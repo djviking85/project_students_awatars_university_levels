@@ -1,5 +1,7 @@
 package ru.hogwarts.school.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
@@ -11,6 +13,7 @@ import java.util.List;
 @Service
 
 public class StudentService  {
+    private final Logger logger = LoggerFactory.getLogger(StudentService.class);
 
     // создаем круд для сервиса
     @Autowired
@@ -21,18 +24,22 @@ public class StudentService  {
     }
 
     public Student addStudent(Student student) {
+        logger.info("We was added a Student!");
         return studentRepository.save(student);
     }
     //    crud read
     public Collection<Student> getAllStudent() {
+        logger.info("We was used getAll method!");
         return studentRepository.findAll();
     }
     //crud update
     public Student updateStudent(Student student) {
+        logger.info("We was udpated Student!");
         return studentRepository.save(student);
     }
     //crud delete
     public void deleteStudent(long id) {
+        logger.info("We was deleted Student!");
          studentRepository.deleteById(id);
     }
 
@@ -51,6 +58,7 @@ public class StudentService  {
         return studentRepository.findById(id).get();
     }
 public Long getCount () {
+        logger.info("We are used getCount method!");
     return studentRepository.count();
 }
 
