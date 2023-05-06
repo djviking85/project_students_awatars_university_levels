@@ -1,3 +1,4 @@
+- liquibase formatted sql
 - changeset student:1
 
 CREATE index student_name_index on Student (name);
