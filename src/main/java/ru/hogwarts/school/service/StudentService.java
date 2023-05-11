@@ -118,6 +118,30 @@ public class StudentService {
 //        тестил разный сайз чувствуется напряжение машины )
 
     }
+    public void printAll() {
+        List<Student> students = studentRepository.findAll();
+        System.out.println(students);
+
+        System.out.println(students.get(0));
+        System.out.println(students.get(1));
+
+        new Thread( () -> {
+            printStudent(students.get(2));
+            printStudent(students.get(3));
+            System.out.println("thr " + students.get(5));
+        })
+                .start();
+        new Thread( () -> {
+            printStudent(students.get(4));
+            printStudent(students.get(5));
+        })
+                .start();
+    }
+
+    public void printStudent(Student student) {
+        System.out.println(Thread.currentThread().getName() + " " + student);
+
+    }
 
 }
 
