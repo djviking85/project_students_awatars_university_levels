@@ -113,8 +113,9 @@ public class StudentService {
     public Integer step4() {
         return Stream
                 .iterate(1, a -> a + 1)
-                .limit(1000000)
+                .limit(7_000_000)
                 .reduce(0, (a, b) -> a + b);
+//        тестил разный сайз чувствуется напряжение машины )
 
     }
 
