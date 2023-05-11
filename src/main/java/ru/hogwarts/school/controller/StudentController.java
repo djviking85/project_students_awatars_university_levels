@@ -146,6 +146,22 @@ public class StudentController {
 ////            вызываем метод трансферт ту на сверер - из жесткого диска и отправляем в браузер пользователя
 //            is.transferTo(os);
 //        }
+@GetMapping("/get-All-With-A")
+public List<String> getAllStudentsWithASorted() {
+    return studientService.nameStudentWithAnameSorted();
+}
+ @GetMapping("/average-age-stream")
+public Double getAllAverageAge() {
+    return studientService.getAllAverageAge();
+}
+ @GetMapping("/more-long-name")
+public String getLongNameFaculty() {
+    return studientService.getLongNameFaculty();
+}
+@GetMapping("/step-4")
+public Integer step4() {
+    return studientService.step4();
+}
 
 
 }
