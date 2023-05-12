@@ -111,11 +111,22 @@ public class StudentService {
                 .orElse("Not have name");
     }
     public Integer step4() {
-        return Stream
+        long startTime = System.currentTimeMillis();
+        int result =  Stream
                 .iterate(1, a -> a + 1)
+                .parallel()
                 .limit(7_000_000)
                 .reduce(0, (a, b) -> a + b);
-//        тестил разный сайз чувствуется напряжение машины )
+        long finishTime = System.currentTimeMillis();
+//        тестил разный сайз чувствуется напряжение машины
+//        имею ввиду, что при увеличении сайза, машина еле работает.
+//        и если запускать с паралель один и тот же большой сайз - машина при
+//        параллели встает колом
+//        но я разницы визуально не заметил - посмотрел что в видео
+//        указываете разницу обработки времени - добавил
+        logger.info("результат {}", result);
+        logger.info("time {}", startTime-finishTime);
+        return result;
 
     }
     public void printAll() {
@@ -128,7 +139,6 @@ public class StudentService {
         new Thread( () -> {
             printStudent(students.get(2));
             printStudent(students.get(3));
-            System.out.println("thr " + students.get(5));
         })
                 .start();
         new Thread( () -> {
@@ -137,11 +147,37 @@ public class StudentService {
         })
                 .start();
     }
+    public void printAllsynchronize() {
+        List<Student> students = studentRepository.findAll();
+        System.out.println(students);
+
+        System.out.println(students.get(0));
+        System.out.println(students.get(1));
+
+        new Thread( () -> {
+            printStudentSynchronize(students.get(2));
+            printStudentSynchronize(students.get(3));
+        })
+                .start();
+        new Thread( () -> {
+            printStudentSynchronize(students.get(4));
+            printStudentSynchronize(students.get(5));
+        })
+                .start();
+    }
 
     public void printStudent(Student student) {
         System.out.println(Thread.currentThread().getName() + " " + student);
 
     }
+    public void printStudentSynchronize(Student student) {
+        synchronized (this) {
+            System.out.println(Thread.currentThread().getName() + " " + student);
+        }
+
+
+    }
+
 
 }
 
