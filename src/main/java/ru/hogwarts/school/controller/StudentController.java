@@ -162,9 +162,9 @@ public String getLongNameFaculty() {
 public Integer step4() {
     return studientService.step4();
 }
-@GetMapping("/print-All")
+@GetMapping("/print-All-Not-Synchr")
 public void printAll() {
-     studientService.printAll();
+     studientService.printAllnotSynh();
 }
 @GetMapping("/print-All-Synchr")
 public void printAllSynchr() {

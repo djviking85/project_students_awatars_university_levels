@@ -129,7 +129,7 @@ public class StudentService {
         return result;
 
     }
-    public void printAll() {
+    public void printAllnotSynh() {
         List<Student> students = studentRepository.findAll();
         System.out.println(students);
 
